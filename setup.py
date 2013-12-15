@@ -71,9 +71,8 @@ setup(
     license="GPLv3",
     scripts=["scripts/usblamp"],
     packages=["usblamp"],
-    install_requires=[
-        "pyusb"
-    ],
+    requires=['pyusb (>= 1.0.0b1)'],
+    install_requires=['pyusb>=1.0.0b1'],
     tests_require=[
         "mock",
         "nose",
