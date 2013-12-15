@@ -10,14 +10,6 @@ This tool was test with python `3.2` and `3.3`.
 
 ##Installation
 
-- - -
-
-Requires PyUSB:
-<https://github.com/walac/pyusb>
-Note: Requires pyusb 1.0. Ubuntu/Debian package installs pyusb 0.4.
-
-- - -
-
 From Pypi
 
 ```
