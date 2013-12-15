@@ -72,13 +72,13 @@ setup(
     scripts=["scripts/usblamp"],
     packages=["usblamp"],
     install_requires=[
-            "pyusb"
+        "pyusb"
     ],
     tests_require=[
-            "mock",
-            "nose",
-            "pep8"
-        ],
+        "mock",
+        "nose",
+        "pep8"
+    ],
     cmdclass={
         "pep8": Pep8Command,
         "nose": NoseCommand
