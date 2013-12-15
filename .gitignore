@@ -1,0 +1,10 @@
+dist
+UsbLamp.egg-info
+build/*
+!build/.keep
+.coverage
+
+*.pyc
+
+.project
+.pydevproject
