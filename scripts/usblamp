@@ -29,6 +29,9 @@ def __parser__():
     parser.add_argument(
         "-b", "--blue", help="Blue", type=str
     )
+    parser.add_argument(
+        "-fi", "--fadein", help="Fade in effect, delay in second", type=str
+    )
 
     return parser
 
@@ -46,7 +49,10 @@ def main():
     if lamp.is_connected() is True:
         lamp.prepare()
         lamp.switch_off()
-        lamp.set_color(color)
+        if args.fadein is not None:
+            lamp.fade_in(args.fadein, color)
+        else:
+            lamp.set_color(color)
 
 if __name__ == "__main__":
     main()

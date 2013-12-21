@@ -114,6 +114,7 @@ class USBLampTest(unittest.TestCase):
         device.ctrl_transfer.return_value = 8
         self.usblamp.device = device
         self.usblamp.set_color(color)
+        self.assertEqual(color, self.usblamp.color)
         device.ctrl_transfer.assert_called_once_with(
             usb.TYPE_CLASS + usb.RECIP_INTERFACE,
             0x09,
@@ -123,7 +124,7 @@ class USBLampTest(unittest.TestCase):
             100
         )
 
-    def test_set_color(self):
+    def test_switch_off(self):
         device = Mock(spec=usb.core.Device)
         device.ctrl_transfer.return_value = 8
         self.usblamp.device = device
@@ -136,3 +137,27 @@ class USBLampTest(unittest.TestCase):
             (0, 0, 0, 0x00, 0x00, 0x00, 0x00, 0x05),
             100
         )
+
+    def test_fade_in(self):
+        device = Mock(spec=usb.core.Device)
+        device.ctrl_transfer.return_value = 8
+        self.usblamp.device = device
+        self.usblamp.switch_off()
+        with patch("time.sleep", return_value=None) as sleep_patch:
+            self.usblamp.fade_in(1, Color("blue"))
+            self.assertEqual(
+                sleep_patch.call_count,
+                64
+            )
+            self.assertEqual(
+                device.ctrl_transfer.call_count,
+                65
+            )
+            device.ctrl_transfer.assert_any_call(
+                usb.TYPE_CLASS + usb.RECIP_INTERFACE,
+                0x09,
+                0x81,
+                0x00,
+                (0, 0, 0, 0x00, 0x00, 0x00, 0x00, 0x05),
+                100
+            )

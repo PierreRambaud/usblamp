@@ -1,14 +1,15 @@
 import usb
+import time
 from usblamp import Color
 
 
 class USBLamp:
     VENDOR_ID = 0x1d34
     PRODUCT_ID = 0x0004
-
     INIT_PACKET1 = (0x1F, 0x01, 0x29, 0x00, 0xB8, 0x54, 0x2C, 0x03)
     INIT_PACKET2 = (0x00, 0x01, 0x29, 0x00, 0xB8, 0x54, 0x2C, 0x04)
     device = None
+    color = None
 
     def __init__(self):
         self.device = None
@@ -55,6 +56,7 @@ class USBLamp:
         if not isinstance(color, Color):
             raise TypeError("Must be an instance of Color")
 
+        self.color = color
         data = (
             color.red,
             color.green,
@@ -69,3 +71,32 @@ class USBLamp:
 
     def switch_off(self):
         self.set_color(Color("black"))
+
+    def fade_in(self, delay, new_color):
+        delay = int(delay)
+        c = Color()
+        max_value = max(new_color.red, new_color.green, new_color.blue)
+        for i in range(max_value):
+            time.sleep((delay * 1000 / max_value + 1) / 1000)
+            c.red = self.__get_new_color(
+                i,
+                max_value,
+                new_color.red,
+                self.color.red
+            )
+            c.green = self.__get_new_color(
+                i,
+                max_value,
+                new_color.green,
+                self.color.green
+            )
+            c.blue = self.__get_new_color(
+                i,
+                max_value,
+                new_color.blue,
+                self.color.blue
+            )
+            self.set_color(c)
+
+    def __get_new_color(self, index, max_value, new_value, old_value):
+        return int(((old_value + (new_value - old_value)) * index) / max_value)
