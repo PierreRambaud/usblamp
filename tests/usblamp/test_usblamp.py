@@ -138,6 +138,52 @@ class USBLampTest(unittest.TestCase):
             100
         )
 
+    def test_blink(self):
+        device = Mock(spec=usb.core.Device)
+        device.ctrl_transfer.return_value = 8
+        self.usblamp.device = device
+        with patch("time.sleep", return_value=None) as sleep_patch:
+            self.usblamp.blink(2, Color("blue"))
+            self.assertEqual(
+                sleep_patch.call_count,
+                4
+            )
+
+            assert device.ctrl_transfer.mock_calls == [
+                call(
+                    usb.TYPE_CLASS + usb.RECIP_INTERFACE,
+                    0x09,
+                    0x81,
+                    0x00,
+                    (0, 0, 64, 0x00, 0x00, 0x00, 0x00, 0x05),
+                    100
+                ),
+                call(
+                    usb.TYPE_CLASS + usb.RECIP_INTERFACE,
+                    0x09,
+                    0x81,
+                    0x00,
+                    (0, 0, 0, 0x00, 0x00, 0x00, 0x00, 0x05),
+                    100
+                ),
+                call(
+                    usb.TYPE_CLASS + usb.RECIP_INTERFACE,
+                    0x09,
+                    0x81,
+                    0x00,
+                    (0, 0, 64, 0x00, 0x00, 0x00, 0x00, 0x05),
+                    100
+                ),
+                call(
+                    usb.TYPE_CLASS + usb.RECIP_INTERFACE,
+                    0x09,
+                    0x81,
+                    0x00,
+                    (0, 0, 0, 0x00, 0x00, 0x00, 0x00, 0x05),
+                    100
+                )
+            ]
+
     def test_fade_in(self):
         device = Mock(spec=usb.core.Device)
         device.ctrl_transfer.return_value = 8

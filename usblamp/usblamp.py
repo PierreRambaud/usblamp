@@ -72,31 +72,40 @@ class USBLamp:
     def switch_off(self):
         self.set_color(Color("black"))
 
+    def blink(self, times, new_color):
+        for i in range(int(times)):
+            self.set_color(new_color)
+            time.sleep(0.5)
+            self.switch_off()
+            time.sleep(0.5)
+
     def fade_in(self, delay, new_color):
         delay = int(delay)
         c = Color()
         max_value = max(new_color.red, new_color.green, new_color.blue)
         for i in range(max_value):
             time.sleep((delay * 1000 / max_value + 1) / 1000)
-            c.red = self.__get_new_color(
+            c.red = self.__transition(
                 i,
-                max_value,
+                self.color.red,
                 new_color.red,
-                self.color.red
+                max_value
             )
-            c.green = self.__get_new_color(
+            c.green = self.__transition(
                 i,
-                max_value,
+                self.color.green,
                 new_color.green,
-                self.color.green
+                max_value
             )
-            c.blue = self.__get_new_color(
+            c.blue = self.__transition(
                 i,
-                max_value,
+                self.color.blue,
                 new_color.blue,
-                self.color.blue
+                max_value
             )
             self.set_color(c)
 
-    def __get_new_color(self, index, max_value, new_value, old_value):
-        return int(((old_value + (new_value - old_value)) * index) / max_value)
+    def __transition(self, index, start_point, end_point, maximum):
+        return int(
+            ((start_point + (end_point - start_point)) * (index + 1)) / maximum
+        )

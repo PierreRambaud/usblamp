@@ -32,6 +32,9 @@ def __parser__():
     parser.add_argument(
         "-fi", "--fadein", help="Fade in effect, delay in second", type=str
     )
+    parser.add_argument(
+        "-bl", "--blink", help="Blink effect, delay in second", type=str
+    )
 
     return parser
 
@@ -39,18 +42,22 @@ def __parser__():
 def main():
     parser = __parser__()
     args = parser.parse_args()
-    if args.color is not None:
-        color = Color(args.color)
-    else:
-        color = Color(args.red, args.green, args.blue)
 
     lamp = USBLamp()
     lamp.open()
     if lamp.is_connected() is True:
         lamp.prepare()
         lamp.switch_off()
+
+        if args.color is not None:
+            color = Color(args.color)
+        else:
+            color = Color(args.red, args.green, args.blue)
+
         if args.fadein is not None:
             lamp.fade_in(args.fadein, color)
+        elif args.blink is not None:
+            lamp.blink(args.blink, color)
         else:
             lamp.set_color(color)
 
