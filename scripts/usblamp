@@ -38,7 +38,6 @@ def __parser__():
 
     return parser
 
-
 def main():
     parser = __parser__()
     args = parser.parse_args()
