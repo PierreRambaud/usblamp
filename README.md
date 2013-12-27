@@ -72,3 +72,7 @@ or
 ## License
    See [LICENSE.md](LICENSE.md) file
 
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/PierreRambaud/usblamp/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
