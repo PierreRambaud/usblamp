@@ -26,7 +26,8 @@ $ ./usblamp --help
 
 ##Usage
 ```
-usage: usblamp [-h] [-c COLOR] [-r RED] [-g GREEN] [-b BLUE]
+usage: usblamp [-h] [-c COLOR] [-r RED] [-g GREEN] [-b BLUE] [-fi FADEIN]
+               [-bl BLINK]
 
 Python script to power the Dreamcheeky USB webmail notifier gadget which is
 shipped with windows only software. by Pierre Rambaud
@@ -40,6 +41,10 @@ optional arguments:
   -g GREEN, --green GREEN
                         Green
   -b BLUE, --blue BLUE  Blue
+  -fi FADEIN, --fadein FADEIN
+                        Fade in effect, delay in second
+  -bl BLINK, --blink BLINK
+                        Blink effect, delay in second
 ```
 
 ##Troubleshooting
