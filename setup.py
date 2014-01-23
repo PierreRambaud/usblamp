@@ -63,11 +63,11 @@ class Pep8Command(Command):
 
 setup(
     name="UsbLamp",
-    version="0.1",
+    version="0.2",
     description="WebMail Notifier python script",
     author="Pierre Rambaud (GoT)",
     author_email="pierre.rambaud86@gmail.com",
-    url="",
+    url="https://github.com/PierreRambaud/usblamp",
     license="GPLv3",
     scripts=["scripts/usblamp"],
     packages=["usblamp"],
