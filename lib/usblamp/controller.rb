@@ -16,13 +16,10 @@ module Usblamp
 
     def open
       usb = LIBUSB::Context.new
-      @device = usb.devices(idVendor: VENDOR_ID, idProduct: PRODUCT_ID).first
-      return false if connected?
-      @device.open_interface(0)
-    end
+      device = usb.devices(idVendor: VENDOR_ID, idProduct: PRODUCT_ID).first
 
-    def connected?
-      @device.nil?
+      fail 'Could no find a supported device.' if device.nil?
+      @device = device.open_interface(0)
     end
 
     def prepare
@@ -31,20 +28,14 @@ module Usblamp
     end
 
     def send(data)
-      request_type =
-      request = 0x09
-      value = 0x81
-      index = 0x00
-      timeout = 100
-
-      return True if device.ctrl_transfer(
-            request_type,
-            request,
-            value,
-            index,
-            data,
-            timeout
-        ) == 8
+      return true if @device
+        .usb_control_msg(
+                         REQUEST_TYPE_CLASS | RECIPIENT_INTERFACE,
+                         REQUEST_SET_CONFIGURATION,
+                         0x81,
+                         ENDPOINT_OUT,
+                         data,
+                         10) == 8
 
       false
     end
