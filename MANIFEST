@@ -9,10 +9,13 @@ Rakefile
 bin/usblamp
 lib/usblamp.rb
 lib/usblamp/cli.rb
+lib/usblamp/cli/blink.rb
+lib/usblamp/cli/fadein.rb
 lib/usblamp/color.rb
 lib/usblamp/controller.rb
 lib/usblamp/version.rb
 spec/spec_helper.rb
+spec/usblamp/cli_spec.rb
 spec/usblamp/color_spec.rb
 spec/usblamp/controller_spec.rb
 task/manifest.rake
