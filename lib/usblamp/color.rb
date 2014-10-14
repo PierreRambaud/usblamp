@@ -58,6 +58,8 @@ module Usblamp
       return set(MAX_VALUE, 0, MAX_VALUE) if string == 'magenta'
       return set(0, MAX_VALUE, MAX_VALUE) if string == 'cyan'
       return set(MAX_VALUE, MAX_VALUE, 0) if string == 'yellow'
+      return set(MAX_VALUE / 2, MAX_VALUE / 2, MAX_VALUE / 2) if
+        string == 'purple'
 
       set(0, 0, 0)
     end
