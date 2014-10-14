@@ -21,8 +21,8 @@ module Usblamp
 
       fail 'Could no find a supported device.' if device.nil?
       @device = device.open
-      @device.claim_interface(0)
       @device.detach_kernel_driver(0) if @device.kernel_driver_active?(0)
+      @device.claim_interface(0)
       send(INIT_PACKET1)
       send(INIT_PACKET2)
     end

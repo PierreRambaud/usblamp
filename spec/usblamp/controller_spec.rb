@@ -108,5 +108,45 @@ module Usblamp
       expect(result.green).to eq(10)
       expect(result.blue).to eq(10)
     end
+
+    it 'should fade in' do
+      device = spy(control_transfer: 8)
+      @controller.color = Color.new('black')
+      @controller.device = device
+      allow(@controller).to receive(:sleep).and_return(true)
+      expect(@controller.fade_in(2, Color.new('blue'))).to be_truthy
+      (1..64).each do |i|
+        expect(device).to have_received(:control_transfer)
+          .with(bmRequestType: 33,
+                bRequest: 9,
+                wValue: 129,
+                wIndex: 0,
+                dataOut: [0, 0, i, 0, 0, 0, 0, 5].map(&:chr).reduce(:+),
+                timeout: 10)
+      end
+    end
+
+    it 'should blink' do
+      device = spy(control_transfer: 8)
+      @controller.device = device
+      allow(@controller).to receive(:sleep).and_return(true)
+      expect(@controller.blink(2, Color.new('blue'))).to be_truthy
+      (1..2).each do
+        expect(device).to have_received(:control_transfer).twice
+          .with(bmRequestType: 33,
+                bRequest: 9,
+                wValue: 129,
+                wIndex: 0,
+                dataOut: [0, 0, 64, 0, 0, 0, 0, 5].map(&:chr).reduce(:+),
+                timeout: 10)
+        expect(device).to have_received(:control_transfer).twice
+          .with(bmRequestType: 33,
+                bRequest: 9,
+                wValue: 129,
+                wIndex: 0,
+                dataOut: [0, 0, 0, 0, 0, 0, 0, 5].map(&:chr).reduce(:+),
+                timeout: 10)
+      end
+    end
   end
 end
