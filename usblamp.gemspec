@@ -8,14 +8,14 @@ Gem::Specification.new do |s|
   s.authors     = ['Pierre Rambaud']
   s.email       = 'pierre.rambaud86@gmail.com'
   s.license     = 'GPL-3.0'
-  s.summary     = 'WebMail Notifier ruby script'
+  s.summary     = 'WebMail Notifier with ruby (Dream Cheeky).'
   s.homepage    = 'https://github.com/PierreRambaud/usblamp'
-  s.description = 'Create your own gem mirror with a simple TCPServer.'
+  s.description = 'WebMail Notifier with ruby (Dream Cheeky).'
   s.executables = ['usblamp']
 
   s.files = File.read(File.expand_path('../MANIFEST', __FILE__)).split("\n")
 
-  s.required_ruby_version = '~> 1.9.2'
+  s.required_ruby_version = '>= 1.9.2'
 
   s.add_dependency 'slop', '~>3.6'
   s.add_dependency 'libusb', '~>0.4'
