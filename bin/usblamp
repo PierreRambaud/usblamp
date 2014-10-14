@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+# -*- coding: utf-8 -*-
+
+require File.expand_path('../../lib/usblamp', __FILE__)
+Usblamp::CLI.slop.parse

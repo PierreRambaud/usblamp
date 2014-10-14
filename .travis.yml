@@ -1,9 +1,7 @@
-language: python
-python:
-  - "3.2"
-  - "3.3"
-install:
-  - "pip install ."
-script: nosetests
+language: ruby
+rvm:
+  - 1.9.3
+  - 2.0.0
+  - 2.1.0
 
-
+script: bundle exec rake
