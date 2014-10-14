@@ -2,54 +2,44 @@
 
 [![Build Status](https://travis-ci.org/PierreRambaud/usblamp.png?branch=master)](https://travis-ci.org/PierreRambaud/usblamp)
 
-Python script to power the Dreamcheeky USB webmail notifier gadget. <http://www.dreamcheeky.com/webmail-notifier>
+Ruby script to power the Dreamcheeky USB webmail notifier gadget. <http://www.dreamcheeky.com/webmail-notifier>
 
-##Supported python version
+##Requirements
 
-This tool was test with python `3.2` and `3.3`.
+- Ruby 1.9.2 or newer
 
 ##Installation
 
-From Pypi
+Assuming RubyGems isn't down you can install the Gem as following:
 
 ```
-$ pip install usblamp
-```
-
-From Github
-
-```
-$ git clone https://github.com/PierreRambaud/usblamp.git
-$ cd usblamp
-$ ./usblamp --help
+$ gem install usblamp
 ```
 
 ##Usage
+
 ```
-usage: usblamp [-h] [-c COLOR] [-r RED] [-g GREEN] [-b BLUE] [-fi FADEIN]
-               [-bl BLINK]
+Usage: usblamp [COMMAND] [OPTIONS]
 
-Python script to power the Dreamcheeky USB webmail notifier gadget which is
-shipped with windows only software. by Pierre Rambaud
-<https://github.com/PierreRambaud/usblamp>
+Options:
 
-optional arguments:
-  -h, --help            show this help message and exit
-  -c COLOR, --color COLOR
-                        Color as hexadecimal or string (#112233 or 'blue')
-  -r RED, --red RED     Red
-  -g GREEN, --green GREEN
-                        Green
-  -b BLUE, --blue BLUE  Blue
-  -fi FADEIN, --fadein FADEIN
-                        Fade in effect, delay in second
-  -bl BLINK, --blink BLINK
-                        Blink effect, delay in second
+    -v, --version      Shows the current version
+    -r, --red          Red
+    -g, --green        Green
+    -b, --blue         Blue
+    -c, --color        Color
+    -h, --help         Display this help message.
+
+Available commands:
+
+  fadein   Fade in effect
+  blink    Blink effect
 ```
 
 ##Troubleshooting
+
 Should be run as root unless the necessary udev rules are set.
-Create the file `/etc/udev/rules.d/42-usblam.rules`
+Create the file `/etc/udev/rules.d/42-usblamp.rules`
 And add this content by replacing `got` by your username:
 ```
 SUBSYSTEM !="usb_device", ACTION !="add", GOTO="datalogger_rules_end"
@@ -59,25 +49,12 @@ LABEL="datalogger_rules_end"
 ```
 
 ## Running tests
+
 Install dependencies:
 
-`$ ./setup.py test`
+`$ bundle install`
 
-To run unit tests:
-`$ ./setup.py nose`
-or
-`$ nosetests`
+To run tests:
+`$ bundle exec rake`
 
-To check code style:
-`$ ./setup.py pep8`
-or
-`$ pep8 ./`
-
-
-## License
-   See [LICENSE.md](LICENSE.md) file
-
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/PierreRambaud/usblamp/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
