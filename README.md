@@ -1,4 +1,4 @@
-#WebMail Notifier with python (Dream Cheeky)
+#WebMail Notifier with Ruby (Dream Cheeky)
 
 [![Build Status](https://travis-ci.org/PierreRambaud/usblamp.png?branch=master)](https://travis-ci.org/PierreRambaud/usblamp)
 
