@@ -28,15 +28,17 @@ module Usblamp
     end
 
     def send(data)
-      return true if @device
-        .control_transfer(
-                          bmRequestType: LIBUSB::REQUEST_TYPE_CLASS |
-                          LIBUSB::RECIPIENT_INTERFACE,
-                          bRequest: LIBUSB::REQUEST_SET_CONFIGURATION,
-                          wValue: 0x81,
-                          wIndex: LIBUSB::ENDPOINT_OUT,
-                          dataOut: data.map(&:chr).reduce(:+),
-                          timeout: 10) == 8
+      return true if @device.control_transfer(
+                                              bmRequestType:
+                                              LIBUSB::REQUEST_TYPE_CLASS |
+                                              LIBUSB::RECIPIENT_INTERFACE,
+                                              bRequest:
+                                              LIBUSB::REQUEST_SET_CONFIGURATION,
+                                              wValue: 0x81,
+                                              wIndex: LIBUSB::ENDPOINT_OUT,
+                                              dataOut: data.map(&:chr)
+                                                .reduce(:+),
+                                              timeout: 10) == 8
 
       false
     end
