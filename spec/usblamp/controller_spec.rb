@@ -4,6 +4,7 @@ require 'libusb'
 require 'usblamp/controller'
 
 # Usblamp module
+# rubocop:disable Metrics/ModuleLength
 module Usblamp
   describe 'Controller' do
     before(:each) do

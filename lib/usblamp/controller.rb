@@ -28,8 +28,7 @@ module Usblamp
     end
 
     def send(data)
-      return true if @device.control_transfer(
-                                              bmRequestType:
+      return true if @device.control_transfer(bmRequestType:
                                               LIBUSB::REQUEST_TYPE_CLASS |
                                               LIBUSB::RECIPIENT_INTERFACE,
                                               bRequest:
@@ -105,8 +104,7 @@ module Usblamp
     def transition(index, start_point, end_point, maximum)
       (((start_point.to_f + (end_point.to_f - start_point.to_f)) *
         (index.to_f + 1.to_f)
-        ) / maximum.to_f
-       ).to_i
+       ) / maximum.to_f).to_i
     end
   end
 end

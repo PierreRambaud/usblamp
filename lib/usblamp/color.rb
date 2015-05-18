@@ -41,13 +41,11 @@ module Usblamp
 
       return set(string[0..1].to_i(16),
                  string[2..3].to_i(16),
-                 string[4..5].to_i(16)
-                 ) if string.length == 6
+                 string[4..5].to_i(16)) if string.length == 6
 
       set((string[0] * 2).to_i(16),
           (string[1] * 2).to_i(16),
-          (string[2] * 2).to_i(16)
-          )
+          (string[2] * 2).to_i(16))
     end
 
     def define_from_string(string)
