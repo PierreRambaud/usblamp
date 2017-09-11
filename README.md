@@ -1,14 +1,14 @@
-#WebMail Notifier with Ruby (Dream Cheeky)
+# WebMail Notifier with Ruby (Dream Cheeky)
 
 [![Build Status](https://travis-ci.org/PierreRambaud/usblamp.png?branch=master)](https://travis-ci.org/PierreRambaud/usblamp)
 
 Ruby script to power the Dreamcheeky USB webmail notifier gadget. <http://www.dreamcheeky.com/webmail-notifier>
 
-##Requirements
+## Requirements
 
 - Ruby 1.9.2 or newer
 
-##Installation
+## Installation
 
 Assuming RubyGems isn't down you can install the Gem as following:
 
@@ -16,7 +16,7 @@ Assuming RubyGems isn't down you can install the Gem as following:
 $ gem install usblamp
 ```
 
-##Usage
+## Usage
 
 ```
 Usage: usblamp [COMMAND] [OPTIONS]
@@ -36,7 +36,7 @@ Available commands:
   blink    Blink effect
 ```
 
-##Troubleshooting
+## Troubleshooting
 
 Should be run as root unless the necessary udev rules are set.
 Create the file `/etc/udev/rules.d/42-usblamp.rules`
